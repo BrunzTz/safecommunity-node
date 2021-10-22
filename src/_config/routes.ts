@@ -1,6 +1,9 @@
 import { Router } from "express";
 const routes = Router();
 
-routes.get('/teste')
+import userController from '../features/controller/userController';
+
+routes.get('/teste', userController.listAll)
+routes.get('/teste1', userController.listOne)
 
 export default routes;
