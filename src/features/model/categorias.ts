@@ -17,7 +17,7 @@ async function insertCategorias(nome: any, descricao: any){
 
 async function selectOneCategorias(id_categorias: any){
 
-    const sql = `SELECT categorias.nome, categorias.descricao FROM community.categorias WHERE id_categorias = $1`
+    const sql = `SELECT * FROM community.categorias WHERE id_categorias = $1`
     const values = [id_categorias]
 
     try {
@@ -32,7 +32,7 @@ async function selectOneCategorias(id_categorias: any){
 
 async function selectAllCategorias(){
 
-    const sql = `SELECT categorias.nome, categorias.descricao FROM community.categorias`
+    const sql = `SELECT * FROM community.categorias`
 
     try {
 

@@ -98,8 +98,11 @@ export default{
 
         try{
 
+            const msg = {
+                message: "subcategoria deletada"
+            }
             const [subcategorias] = await subcategoriasModel.deleteSubcategorias(id_subcategorias)
-            response.json(subcategorias)
+            response.json([subcategorias, msg.message])
 
         }catch(err) {
 
