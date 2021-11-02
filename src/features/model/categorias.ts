@@ -11,7 +11,7 @@ async function insertCategorias(nome: any, descricao: any){
         return res.rows;
 
     } catch (err) {
-        console.error(err);
+        return(err);
     }
 }
 
@@ -26,7 +26,7 @@ async function selectOneCategorias(id_categorias: any){
         return res.rows;
 
     } catch (err) {
-        console.error(err);
+        return(err);
     }
 }
 
@@ -40,7 +40,7 @@ async function selectAllCategorias(){
         return res.rows;
 
     } catch (err) {
-        console.error(err);
+        return(err);
     }
 }
 
@@ -56,7 +56,7 @@ async function updateCategorias(id_categorias: any, nome: any, descricao: any){
         return res.rows;
 
     } catch (err) {
-        console.error(err);
+        return(err);
     }
 }
 

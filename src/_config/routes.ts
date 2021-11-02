@@ -6,9 +6,9 @@ import habilidadesController from '../features/controller/habilidadesController'
 import categoriasController from '../features/controller/categoriasController'
 import subcategoriasController from '../features/controller/subcategoriasController'
 import ajudasController from '../features/controller/ajudasController'
+import classificacoesController from "../features/controller/classificacoesController";
 
 //USUÁRIO
-
 //visualizar usuários
 routes.get('/api/user', userController.listAll)
 routes.get('/api/user/:id_pessoa', userController.viewUser)
@@ -53,8 +53,21 @@ routes.delete('/api/habilidades/:id_habilidades', habilidadesController.deleteHa
 //AJUDAS
 //Visualizar ajudas
 routes.get('/api/ajudas/:id_ajuda', ajudasController.listOne)
-
+routes.get('/api/ajudas/contribuinte/:id_usuario_contribuinte', ajudasController.listAllPerHelper)
+routes.get('/api/ajudas/auxiliado/:id_usuario_auxiliado', ajudasController.listAllPerHelped)
 //Inserir ajuda
 routes.post('/api/ajudas/:id_usuario_auxiliado', ajudasController.insert)
+//Inserir/atualizar ajudante
+routes.put('/api/ajudas/contribuinte/:id_usuario_contribuinte', ajudasController.changeContribuinte)
+//Atualizar ajuda
+routes.put('/api/ajudas/:id_ajuda', ajudasController.update)
+//Concluir ajuda
+routes.put('/api/ajudas/finish/:id_ajuda', ajudasController.finishHelping)
+//Deletar ajuda
+routes.delete('/api/ajudas/:id_ajuda', ajudasController.delete)
+
+//Classificacao
+routes.get('/api/classificacao/:id_usuario_contribuinte', classificacoesController.listOneClassificacao)
+routes.get('/api/classificacao', classificacoesController.listAllClassificacao)
 
 export default routes;

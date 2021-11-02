@@ -63,7 +63,11 @@ export default{
         try {
 
             const [habilidades] = await habilidadesModel.deleteHabilidades(id_habilidades)
-            response.json(habilidades)
+            const retorno = {
+                mensagem: "Habilidade deletada",
+                habilidade: habilidades
+            }
+            response.json(retorno)
     
         } catch(err) {
 
