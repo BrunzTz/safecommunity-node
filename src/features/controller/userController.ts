@@ -27,7 +27,13 @@ export default {
 
             const [person] = await userModel.insertPerson(nome, endereco, telefone, cpf, sexo, data_nasc, email, senha)
             const [user] = await userModel.insertUser(person.id_pessoa)
-            response.json(user)
+
+            const retorno = {
+                status: 200,
+                mensagem: "Cadastro realizado com sucesso",
+                user: user
+            }
+            response.json(retorno)
     
         } catch(err) {
 
@@ -59,8 +65,13 @@ export default {
 
             const [person] = await userModel.authPerson(email, senha)
             const user = await userModel.authUser(person.id_pessoa)
+            const retorno = {
+                status: 200,
+                mensagem: "Login realizado com sucesso",
+                user: user
+            }
+            response.json(retorno)
 
-            response.json(user)
         }catch (err){
 
             const msg = {

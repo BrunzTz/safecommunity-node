@@ -78,7 +78,7 @@ async function authPerson(email:any, senha: any){
 
 async function authUser(id_pessoa: any){
 
-    const sql = `SELECT usuario.id_usuario, pessoa.id_pessoa, pessoa.nome, pessoa.endereco, pessoa.sexo, pessoa.data_nasc 
+    const sql = `SELECT usuario.id_usuario, pessoa.id_pessoa, pessoa.nome, pessoa.cpf, pessoa.endereco, pessoa.sexo, pessoa.data_nasc, pessoa.email 
                     FROM community.usuario 
                     LEFT OUTER JOIN community.pessoa ON pessoa.id_pessoa = usuario.id_pessoa 
                     WHERE usuario.id_pessoa = $1`
