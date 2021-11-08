@@ -2,7 +2,7 @@ const categoriasConnection = require('../../database/connection')
 
 async function insertCategorias(nome: any, descricao: any){
 
-    const sql = `INSERT INTO community.categorias(nome, descricao) VALUES($1, $2) RETURNING categorias.nome, categorias.descricao`
+    const sql = `INSERT INTO community.categorias(nome, descricao) VALUES($1, $2) RETURNING categorias.id_categorias, categorias.nome, categorias.descricao`
     const values = [nome, descricao]
 
     try {
