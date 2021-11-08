@@ -2,7 +2,9 @@ const usuarioConnection = require('../../database/connection')
 
 async function listAll(){
 
-    const sql = `SELECT pessoa.id_pessoa, pessoa.nome, pessoa.endereco, pessoa.data_nasc FROM community.usuario LEFT OUTER JOIN community.pessoa on usuario.id_pessoa = pessoa.id_pessoa;`
+    const sql = `SELECT pessoa.id_pessoa, pessoa.nome, pessoa.endereco, pessoa.data_nasc 
+                    FROM community.usuario 
+                    LEFT OUTER JOIN community.pessoa on usuario.id_pessoa = pessoa.id_pessoa;`
 
     try {
 

@@ -2,7 +2,9 @@ const habilidadesConnection = require('../../database/connection')
 
 async function insertHabilidades(id_usuario: any, nome: any, descricao: any){
 
-    const sql = `INSERT INTO community.habilidades (id_usuario, nome, descricao) VALUES ($1, $2, $3) RETURNING id_habilidades, nome, descricao`
+    const sql = `INSERT INTO community.habilidades (id_usuario, nome, descricao) 
+                    VALUES ($1, $2, $3) 
+                    RETURNING id_habilidades, nome, descricao`
     const values = [id_usuario, nome, descricao]
 
     try {
@@ -32,7 +34,8 @@ async function deleteHabilidades(id_habilidades: any){
 
 async function selectOneHabilidades(id_habilidades: any){
 
-    const sql = `SELECT habilidades.id_habilidades, habilidades.nome, habilidades.descricao FROM community.habilidades WHERE habilidades.id_habilidades = $1`
+    const sql = `SELECT habilidades.id_habilidades, habilidades.nome, habilidades.descricao 
+                    FROM community.habilidades WHERE habilidades.id_habilidades = $1`
     const values = [id_habilidades]
 
     try {
@@ -47,7 +50,8 @@ async function selectOneHabilidades(id_habilidades: any){
 
 async function selectAllHabilidades(id_usuario: any){
 
-    const sql = `SELECT habilidades.id_habilidades, habilidades.nome, habilidades.descricao FROM community.habilidades WHERE habilidades.id_usuario = $1`
+    const sql = `SELECT habilidades.id_habilidades, habilidades.nome, habilidades.descricao 
+                    FROM community.habilidades WHERE habilidades.id_usuario = $1`
     const values = [id_usuario]
 
     try {

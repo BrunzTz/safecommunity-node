@@ -2,7 +2,9 @@ const subcategoriasConnection = require('../../database/connection')
 
 async function insertSubcategorias(id_categorias: any, nome: any, descricao: any){
 
-    const sql = `INSERT INTO community.subcategorias(id_categorias, nome, descricao) VALUES($1, $2, $3) RETURNING subcategorias.id_subcategorias, subcategroias.id_categorias, subcategorias.nome, subcategorias.descricao`
+    const sql = `INSERT INTO community.subcategorias(id_categorias, nome, descricao) 
+                    VALUES($1, $2, $3) 
+                    RETURNING subcategorias.id_subcategorias, subcategroias.id_categorias, subcategorias.nome, subcategorias.descricao`
     const values = [id_categorias, nome, descricao]
 
     try {
