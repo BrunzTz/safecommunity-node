@@ -18,7 +18,9 @@ export default{
         try{
 
             const [subcategorias] = await subcategoriasModel.insertSubcategorias(id_categorias, nome, descricao)
-            response.json(subcategorias)
+            const [ subcategoriasAdd ] = await subcategoriasModel.selectOneSubcategorias(subcategorias.id_subcategorias)
+            
+            response.json(subcategoriasAdd)
 
         }catch(err) {
 
@@ -79,7 +81,9 @@ export default{
         try{
 
             const [subcategorias] = await subcategoriasModel.updateSubcategorias(id_subcategorias, nome, descricao)
-            response.json(subcategorias)
+            const [ subcategoriasAtt ] = await subcategoriasModel.selectOneSubcategorias(subcategorias.id_subcategorias)
+            
+            response.json(subcategoriasAtt)
 
         }catch(err) {
 
