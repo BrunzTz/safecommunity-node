@@ -4,7 +4,7 @@ const ajudasConnection = require("../../database/connection")
 async function listOneAjuda(id_ajuda: any){
 
     const sql1 = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.status, subcategorias.nome as subcategoria_nome, categorias.nome as categoria_nome, 
-                    usuario.id_usuario as id_usuario_auxiliado, ajuda.id_usuario_contribuinte
+                    usuario.id_usuario as id_usuario_auxiliado, ajuda.id_usuario_contribuinte, subcategorias.id_subcategorias, categorias.id_categorias
                     FROM community.ajuda LEFT OUTER JOIN community.categorias on categorias.id_categorias = ajuda.id_categoria
                     LEFT OUTER JOIN community.subcategorias on subcategorias.id_subcategorias = ajuda.id_subcategoria
                     LEFT OUTER JOIN community.usuario on usuario.id_usuario = ajuda.id_usuario_auxiliado
