@@ -1,0 +1,65 @@
+create schema community;
+
+CREATE TABLE community.pessoa (
+	id_pessoa serial not null,
+	nome varchar(150) not null,
+	endereco varchar(100) null,
+	telefone varchar(15) not null,
+	cpf varchar(15) not null,
+	sexo varchar(1) null,
+	data_nasc date null,
+	email varchar(100) not null,
+	senha varchar(100) not null,
+	PRIMARY KEY(id_pessoa),
+	CONSTRAINT email_unico UNIQUE(email) 
+);
+
+CREATE TABLE community.habilidades(
+	id_habilidades serial4 not null,
+	id_usuario int not null,
+	nome varchar(100),
+	descricao text,
+	constraint PK_habilidade primary key(id_habilidades)
+);
+
+CREATE TABLE community.usuario (
+	id_usuario serial not null,
+	id_pessoa int not null,
+	PRIMARY KEY(id_usuario),
+	CONSTRAINT fk_pessoa FOREIGN KEY(id_pessoa) REFERENCES community.pessoa(id_pessoa)
+);
+
+CREATE TABLE community.categorias (
+	id_categorias serial not null,
+	nome varchar(150) not null,
+	descricao text null,
+	PRIMARY KEY(id_categorias)
+);
+
+CREATE TABLE community.subcategorias (
+	id_subcategorias serial not null,
+	id_categorias int not null,
+	nome varchar(150) not null,
+	descricao text null,
+	PRIMARY KEY(id_subcategorias),
+	CONSTRAINT fk_categorias FOREIGN KEY(id_categorias) REFERENCES community.categorias(id_categorias)
+);
+
+CREATE TABLE community.ajuda (
+	id_ajuda serial not null,
+	id_usuario_auxiliado int not null,
+	id_usuario_contribuinte int null,
+	id_categoria int not null,
+	id_subcategoria int not null,
+	classificacao numeric(2,1) null,
+	comentario text null,
+	status numeric null, 
+	PRIMARY KEY(id_ajuda),
+	CONSTRAINT fk_usuario_auxiliado FOREIGN KEY(id_usuario_auxiliado) REFERENCES community.usuario(id_usuario),
+	CONSTRAINT fk_usuario_contribuinte FOREIGN KEY(id_usuario_contribuinte) REFERENCES community.usuario(id_usuario)
+);
+
+CREATE VIEW community.classificacoes AS
+	SELECT AVG(ajuda.classificacao) AS media_classificacao, usuario.id_usuario AS id_usuario_contribuinte FROM community.ajuda 
+	LEFT OUTER JOIN community.usuario ON usuario.id_usuario = ajuda.id_usuario_contribuinte
+	GROUP BY usuario.id_usuario;
