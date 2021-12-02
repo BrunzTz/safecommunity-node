@@ -55,6 +55,10 @@ routes.delete('/api/habilidades/:id_habilidades', habilidadesController.deleteHa
 routes.get('/api/ajudas/:id_ajuda', ajudasController.listOne)
 routes.get('/api/ajudas/contribuinte/:id_usuario_contribuinte', ajudasController.listAllPerHelper)
 routes.get('/api/ajudas/auxiliado/:id_usuario_auxiliado', ajudasController.listAllPerHelped)
+routes.get('/api/ajudas/disponiveis/:id_usuario_auxiliado', ajudasController.listAllAvailable)
+routes.get('/api/ajudas/ongoingperhelper/:id_usuario_contribuinte', ajudasController.listAllongoingPerHelper)
+routes.get('/api/ajudas/finishedperhelped/:id_usuario_auxiliado', ajudasController.listAllFinishedPerHelped)
+routes.get('/api/ajudas/finished/:status', ajudasController.listAllHelpsFinished)
 //Inserir ajuda
 routes.post('/api/ajudas/:id_usuario_auxiliado', ajudasController.insert)
 //Inserir/atualizar ajudante

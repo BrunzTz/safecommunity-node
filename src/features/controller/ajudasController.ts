@@ -238,5 +238,117 @@ export default {
 
             response.json(msg)
         }
+    },
+
+    async listAllAvailable(request: Request, response: Response){
+
+        const{
+            id_usuario_auxiliado
+        } = request.params
+
+        try{
+
+            const ajudas = await ajudasModel.listAllAvailable(id_usuario_auxiliado)
+            const retorno = {
+                status: 200,
+                mensagem: "Ajudas encontradas",
+                ajudas: ajudas
+            }
+
+            response.json(retorno)
+
+        } catch(err){
+
+            const msg = {
+                mensagem: "Não foi possível encontrar as ajudaa",
+                erro: err
+            }
+
+            response.json(msg)
+        }
+        
+    },
+
+    async listAllongoingPerHelper(request: Request, response: Response){
+
+        const{
+            id_usuario_contribuinte
+        } = request.params
+
+        try{
+
+            const ajudas = await ajudasModel.listAllongoingPerHelper(id_usuario_contribuinte)
+            const retorno = {
+                status: 200,
+                mensagem: "Ajudas encontradas",
+                ajudas: ajudas
+            }
+
+            response.json(retorno)
+        } catch(err){
+
+            const msg = {
+                mensagem: "Não foi possível encontrar as ajudaa",
+                erro: err
+            }
+
+            response.json(msg)
+        }
+    },
+
+    async listAllFinishedPerHelped(request: Request, response: Response){
+        const{
+            id_usuario_auxiliado
+        } = request.params
+
+        try{
+
+            const ajudas = await ajudasModel.listAllFinishedPerHelped(id_usuario_auxiliado)
+            const retorno = {
+                status: 200,
+                mensagem: "Ajudas encontradas",
+                ajudas: ajudas
+            }
+
+            response.json(retorno)
+        } catch(err){
+
+            const msg = {
+                mensagem: "Não foi possível encontrar as ajudaa",
+                erro: err
+            }
+
+            response.json(msg)
+        }
+    },
+
+    async listAllHelpsFinished(request: Request, response: Response){
+
+        const{
+            status
+        } = request.params
+
+        try{
+
+            const ajudas = await ajudasModel.listAllAjudas(status)
+            console.log(ajudas)
+            const retorno = {
+                status: 200,
+                mensagem: "Ajudas encontradas",
+                ajudas: ajudas
+            }
+
+            response.json(retorno)
+        } catch(err){
+
+            console.log(err)
+
+            const msg = {
+                mensagem: "Não foi possível encontrar as ajudaa",
+                erro: err
+            }
+
+            response.json(msg)
+        }
     }
 }

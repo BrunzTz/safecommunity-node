@@ -2,15 +2,11 @@ import { Client } from 'pg';
 const certificado = require('../database/ssl')
 
 const client = new Client({
-    user: 'brunorocha@safe-community',
-    host: 'safe-community.postgres.database.azure.com',
+    user: 'postgres',
+    host: 'localhost',
     database: 'postgres',
-    password: 'bruno@1999',
-    port: 5432,
-    ssl: {
-        cert: certificado.cert,
-        rejectUnauthorized: true,
-    },
+    password: '',
+    port: 5432
 });
 
 async function connect(){
