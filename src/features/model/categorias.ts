@@ -34,7 +34,7 @@ async function selectOneCategorias(id_categorias: any){
 
 async function selectAllCategorias(){
 
-    const sql = `SELECT * FROM community.categorias`
+    const sql = `SELECT * FROM community.categorias order by id_categorias`
 
     try {
 
@@ -49,7 +49,7 @@ async function selectAllCategorias(){
 async function updateCategorias(id_categorias: any, nome: any, descricao: any){
 
     const sql = `UPDATE community.categorias SET nome = $1, descricao = $2 
-                    WHERE id_categorias = $3 RETURNING nome, descricao`
+                    WHERE id_categorias = $3 RETURNING id_categorias, nome, descricao`
     const values= [nome, descricao, id_categorias]
 
     try {
