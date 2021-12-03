@@ -50,7 +50,7 @@ async function insertPerson(nome: any, endereco: any, telefone: any, cpf: any, s
 
 async function insertUser(id_pessoa: string){
 
-    const sql = `INSERT INTO community.usuario (id_pessoa) VALUES ($1) RETURNING usuario.id_usuario`
+    const sql = `INSERT INTO community.usuario (id_pessoa, administrator) VALUES ($1, 0) RETURNING usuario.id_usuario`
     const values = [id_pessoa]
 
     try {
@@ -80,7 +80,7 @@ async function authPerson(email:any, senha: any){
 
 async function authUser(id_pessoa: any){
 
-    const sql = `SELECT usuario.id_usuario, pessoa.id_pessoa, pessoa.nome, pessoa.cpf, pessoa.endereco, pessoa.sexo, pessoa.data_nasc, pessoa.email 
+    const sql = `SELECT usuario.id_usuario, usuario.administrator, pessoa.id_pessoa, pessoa.nome, pessoa.cpf, pessoa.endereco, pessoa.sexo, pessoa.data_nasc, pessoa.email 
                     FROM community.usuario 
                     LEFT OUTER JOIN community.pessoa ON pessoa.id_pessoa = usuario.id_pessoa 
                     WHERE usuario.id_pessoa = $1`

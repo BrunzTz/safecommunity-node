@@ -113,7 +113,7 @@ async function listAllAjudaPerHelped(id_usuario_auxiliado: any){
                     FROM community.ajuda LEFT OUTER JOIN community.categorias on categorias.id_categorias = ajuda.id_categoria
                     LEFT OUTER JOIN community.subcategorias on subcategorias.id_subcategorias = ajuda.id_subcategoria
                     LEFT OUTER JOIN community.usuario on usuario.id_usuario = ajuda.id_usuario_auxiliado
-                    WHERE ajuda.id_usuario_auxiliado = $1;`
+                    WHERE ajuda.id_usuario_auxiliado = $1 AND ajuda.status = 1 or ajuda.status = 2;`
     const values = [id_usuario_auxiliado]
 
     try {
@@ -285,6 +285,30 @@ async function listAllFinishedPerHelped(id_usuario_auxiliado: any){
     }
 }
 
+async function listAllFinishedPerHelper(id_usuario_contribuinte: any){
+
+    const sql = `SELECT ajuda.id_ajuda, ajuda.status, ajuda.id_usuario_contribuinte, 
+    pessoa.nome as nome_pessoa, pessoa.endereco, pessoa.telefone, pessoa.email, 
+    categorias.nome as nome_categoria, subcategorias.nome as nome_subcategoria
+    FROM community.ajuda 
+    LEFT OUTER JOIN community.usuario on usuario.id_usuario = ajuda.id_usuario_contribuinte
+    LEFT OUTER JOIN community.pessoa on pessoa.id_pessoa = usuario.id_pessoa
+    LEFT OUTER JOIN community.categorias on categorias.id_categorias = ajuda.id_categoria
+    LEFT OUTER JOIN community.subcategorias on subcategorias.id_subcategorias = ajuda.id_subcategoria
+    WHERE ajuda.id_usuario_contribuinte = $1 and ajuda.status = 3`
+
+    const values = [id_usuario_contribuinte]
+
+    try {
+
+        const res = await ajudasConnection.client.query(sql, values);
+        return res.rows;
+
+    } catch (err) {
+        return(err);
+    }
+}
+
 module.exports = { 
     insertAjuda, 
     listOneAjuda, 
@@ -296,6 +320,7 @@ module.exports = {
     finishHelping, 
     listAllAvailable, 
     listAllFinishedPerHelped,
+    listAllFinishedPerHelper,
     listAllongoingPerHelper,
     listAllAjudas
 }
