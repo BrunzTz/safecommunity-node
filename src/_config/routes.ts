@@ -58,6 +58,7 @@ routes.get('/api/ajudas/auxiliado/:id_usuario_auxiliado', ajudasController.listA
 routes.get('/api/ajudas/disponiveis/:id_usuario_auxiliado', ajudasController.listAllAvailable)
 routes.get('/api/ajudas/ongoingperhelper/:id_usuario_contribuinte', ajudasController.listAllongoingPerHelper)
 routes.get('/api/ajudas/finishedperhelped/:id_usuario_auxiliado', ajudasController.listAllFinishedPerHelped)
+routes.get('/api/ajudas/finishedperhelper/:id_usuario_contribuinte', ajudasController.listAllFinishedPerHelper)
 routes.get('/api/ajudas/finished/:status', ajudasController.listAllHelpsFinished)
 //Inserir ajuda
 routes.post('/api/ajudas/:id_usuario_auxiliado', ajudasController.insert)

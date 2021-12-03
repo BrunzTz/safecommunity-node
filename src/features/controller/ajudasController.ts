@@ -322,6 +322,32 @@ export default {
         }
     },
 
+    async listAllFinishedPerHelper(request: Request, response: Response){
+        const{
+            id_usuario_contribuinte
+        } = request.params
+
+        try{
+
+            const ajudas = await ajudasModel.listAllFinishedPerHelper(id_usuario_contribuinte)
+            const retorno = {
+                status: 200,
+                mensagem: "Ajudas encontradas",
+                ajudas: ajudas
+            }
+
+            response.json(retorno)
+        } catch(err){
+
+            const msg = {
+                mensagem: "Não foi possível encontrar as ajudaa",
+                erro: err
+            }
+
+            response.json(msg)
+        }
+    },
+
     async listAllHelpsFinished(request: Request, response: Response){
 
         const{
