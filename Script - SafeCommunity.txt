@@ -61,6 +61,9 @@ CREATE TABLE community.ajuda (
 );
 
 CREATE VIEW community.classificacoes AS
-	SELECT AVG(ajuda.classificacao) AS media_classificacao, usuario.id_usuario AS id_usuario_contribuinte FROM community.ajuda 
+	SELECT AVG(ajuda.classificacao) AS media_classificacao, count(pessoa.nome) as total_ajudas, usuario.id_usuario AS id_usuario_contribuinte,
+	pessoa.nome as nome_usuario_contribuinte
+	FROM community.ajuda 
 	LEFT OUTER JOIN community.usuario ON usuario.id_usuario = ajuda.id_usuario_contribuinte
-	GROUP BY usuario.id_usuario;
+	left outer join community.pessoa on pessoa.id_pessoa = usuario.id_pessoa 
+	GROUP BY usuario.id_usuario, pessoa.nome;
