@@ -223,7 +223,7 @@ async function finishHelping(id_ajuda: any, status: any, classificacao: any){
 
 async function listAllAvailable(id_usuario_auxiliado: any){
 
-    const sql = `SELECT ajuda.id_ajuda, ajuda.status, ajuda.id_usuario_auxiliado, 
+    const sql = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.status, ajuda.id_usuario_auxiliado, 
     pessoa.nome as nome_pessoa, pessoa.endereco, pessoa.telefone, pessoa.email, 
     categorias.nome as nome_categoria, subcategorias.nome as nome_subcategoria
     FROM community.ajuda 
@@ -247,7 +247,7 @@ async function listAllAvailable(id_usuario_auxiliado: any){
 
 async function listAllongoingPerHelper(id_usuario_contribuinte: any){
 
-    const sql = `SELECT ajuda.id_ajuda, ajuda.status, ajuda.id_usuario_contribuinte, 
+    const sql = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.status, ajuda.id_usuario_contribuinte, 
     pessoa.nome as nome_pessoa, pessoa.endereco, pessoa.telefone, pessoa.email, 
     categorias.nome as nome_categoria, subcategorias.nome as nome_subcategoria
     FROM community.ajuda 
@@ -272,12 +272,14 @@ async function listAllongoingPerHelper(id_usuario_contribuinte: any){
 
 async function listAllFinishedPerHelped(id_usuario_auxiliado: any){
 
-    const sql = `SELECT ajuda.id_ajuda, ajuda.status, ajuda.id_usuario_auxiliado, 
-    pessoa.nome as nome_pessoa, pessoa.endereco, pessoa.telefone, pessoa.email, 
+    const sql = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.status, ajuda.id_usuario_auxiliado, ajuda.classificacao,
+    pessoa.nome as nome_pessoa_auxiliado, pct.nome nome_pessoa_contribuinte, pessoa.endereco, pessoa.telefone, pessoa.email, 
     categorias.nome as nome_categoria, subcategorias.nome as nome_subcategoria
     FROM community.ajuda 
     LEFT OUTER JOIN community.usuario on usuario.id_usuario = ajuda.id_usuario_auxiliado
     LEFT OUTER JOIN community.pessoa on pessoa.id_pessoa = usuario.id_pessoa
+    LEFT OUTER JOIN community.usuario uct on uct.id_usuario = ajuda.id_usuario_contribuinte
+    LEFT OUTER JOIN community.pessoa pct on pct.id_pessoa = uct.id_pessoa
     LEFT OUTER JOIN community.categorias on categorias.id_categorias = ajuda.id_categoria
     LEFT OUTER JOIN community.subcategorias on subcategorias.id_subcategorias = ajuda.id_subcategoria
     WHERE ajuda.id_usuario_auxiliado = $1 and ajuda.status = 3`
@@ -296,12 +298,14 @@ async function listAllFinishedPerHelped(id_usuario_auxiliado: any){
 
 async function listAllFinishedPerHelper(id_usuario_contribuinte: any){
 
-    const sql = `SELECT ajuda.id_ajuda, ajuda.status, ajuda.id_usuario_contribuinte, 
-    pessoa.nome as nome_pessoa, pessoa.endereco, pessoa.telefone, pessoa.email, 
+    const sql = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.status, ajuda.id_usuario_contribuinte, ajuda.classificacao,
+    pessoa.nome as nome_pessoa_contribuinte, pessoa.endereco, pessoa.telefone, pessoa.email, pax.nome nome_pessoa_auxiliado,
     categorias.nome as nome_categoria, subcategorias.nome as nome_subcategoria
     FROM community.ajuda 
     LEFT OUTER JOIN community.usuario on usuario.id_usuario = ajuda.id_usuario_contribuinte
     LEFT OUTER JOIN community.pessoa on pessoa.id_pessoa = usuario.id_pessoa
+    LEFT OUTER JOIN community.usuario uax on uax.id_usuario = ajuda.id_usuario_auxiliado
+    LEFT OUTER JOIN community.pessoa pax on pax.id_pessoa = uax.id_pessoa
     LEFT OUTER JOIN community.categorias on categorias.id_categorias = ajuda.id_categoria
     LEFT OUTER JOIN community.subcategorias on subcategorias.id_subcategorias = ajuda.id_subcategoria
     WHERE ajuda.id_usuario_contribuinte = $1 and ajuda.status = 3`
