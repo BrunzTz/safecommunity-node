@@ -25,6 +25,7 @@ CREATE TABLE community.habilidades(
 CREATE TABLE community.usuario (
 	id_usuario serial not null,
 	id_pessoa int not null,
+	administrator int not null default 0,
 	PRIMARY KEY(id_usuario),
 	CONSTRAINT fk_pessoa FOREIGN KEY(id_pessoa) REFERENCES community.pessoa(id_pessoa)
 );
