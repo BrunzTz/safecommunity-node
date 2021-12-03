@@ -214,7 +214,7 @@ async function finishHelping(id_ajuda: any, status: any, classificacao: any){
 
 async function listAllAvailable(id_usuario_auxiliado: any){
 
-    const sql = `SELECT ajuda.id_ajuda, ajuda.status, ajuda.id_usuario_auxiliado, 
+    const sql = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.status, ajuda.id_usuario_auxiliado, 
     pessoa.nome as nome_pessoa, pessoa.endereco, pessoa.telefone, pessoa.email, 
     categorias.nome as nome_categoria, subcategorias.nome as nome_subcategoria
     FROM community.ajuda 
@@ -238,7 +238,7 @@ async function listAllAvailable(id_usuario_auxiliado: any){
 
 async function listAllongoingPerHelper(id_usuario_contribuinte: any){
 
-    const sql = `SELECT ajuda.id_ajuda, ajuda.status, ajuda.id_usuario_contribuinte, 
+    const sql = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.status, ajuda.id_usuario_contribuinte, 
     pessoa.nome as nome_pessoa, pessoa.endereco, pessoa.telefone, pessoa.email, 
     categorias.nome as nome_categoria, subcategorias.nome as nome_subcategoria
     FROM community.ajuda 
