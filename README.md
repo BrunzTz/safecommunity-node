@@ -1,20 +1,29 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+O projeto foi criado em Node utilizando a versão 14.17.5.
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+ Guia de como começar a visualização do front-end do SafeCommunity:
+1.	Instalando dependencias
+        `npm install`
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+2.	Dependencias do Software
+        `node`
+        `npm`
+        `postgres`
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Development server
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+Rodar o node utilizando o comando `npm start`.
+
+## Configuration Database
+
+Acessar o arquivo `src/database/connection.ts`
+```
+const client = new Client({
+    user: 'postgres', -- Usuário do banco de dados
+    host: 'localhost', -- Instância do servidor
+    database: 'postgres', -- Nome do banco de dados
+    password: 'postgres', -- Senha do banco de dados
+    port: 5432  -- Porta do banco de dados
+});
+```
