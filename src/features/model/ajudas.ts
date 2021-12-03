@@ -17,7 +17,8 @@ async function listOneAjuda(id_ajuda: any){
 
         const sql2 = `SELECT 
                         pessoa.nome as nome_pessoa_auxiliada, 
-                        pessoa.email as email_pessoa_auxiliada, 
+                        pessoa.email as email_pessoa_auxiliada,
+                        pessoa.telefone as telefone_pessoa_auxiliada, 
                         pessoa.id_pessoa as id_pessoa_auxiliada FROM 
                         community.usuario
                         LEFT OUTER JOIN community.pessoa on pessoa.id_pessoa = usuario.id_pessoa
@@ -32,7 +33,8 @@ async function listOneAjuda(id_ajuda: any){
 
                 const sql3 = `SELECT 
                                 pessoa.nome as nome_pessoa_contribuinte, 
-                                pessoa.email as email_pessoa_contribuinte, 
+                                pessoa.email as email_pessoa_contribuinte,
+                                pessoa.telefone as telefone_pessoa_contribuinte, 
                                 pessoa.id_pessoa as id_pessoa_contribuinte FROM
                                 community.usuario
                                 LEFT OUTER JOIN community.pessoa on pessoa.id_pessoa = usuario.id_pessoa
@@ -64,11 +66,14 @@ async function listOneAjuda(id_ajuda: any){
 
 async function listAllAjudas(status: any){
 
-    const sql1 = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.classificacao, ajuda.status, subcategorias.nome as subcategoria_nome, categorias.nome as categoria_nome, 
-                    usuario.id_usuario as id_usuario_auxiliado, ajuda.id_usuario_contribuinte
+    const sql1 = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.classificacao, ajuda.status, 
+                    subcategorias.nome as subcategoria_nome, categorias.nome as categoria_nome, 
+                    usuario.id_usuario as id_usuario_auxiliado, ajuda.id_usuario_contribuinte,
+                    pessoa.nome as nome_pessoa_auxiliada, pessoa.telefone as telefone_pessoa_auxiliada
                     FROM community.ajuda LEFT OUTER JOIN community.categorias on categorias.id_categorias = ajuda.id_categoria
                     LEFT OUTER JOIN community.subcategorias on subcategorias.id_subcategorias = ajuda.id_subcategoria
                     LEFT OUTER JOIN community.usuario on usuario.id_usuario = ajuda.id_usuario_auxiliado
+                    LEFT OUTER JOIN community.pessoa on pessoa.id_pessoa = usuario.id_pessoa
                     WHERE ajuda.status = $1;`
     const values1 = [status]
     
@@ -109,10 +114,12 @@ async function insertAjuda(id_usuario_auxiliado: any, id_categoria: any, id_subc
 async function listAllAjudaPerHelped(id_usuario_auxiliado: any){
 
     const sql = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.status, subcategorias.nome as subcategoria_nome, categorias.nome as categoria_nome, 
-                    ajuda.id_usuario_auxiliado as id_usuario_auxiliado
+                    ajuda.id_usuario_auxiliado as id_usuario_auxiliado,
+                    pessoa.nome as nome_pessoa_auxiliada, pessoa.telefone as telefone_pessoa_auxiliada
                     FROM community.ajuda LEFT OUTER JOIN community.categorias on categorias.id_categorias = ajuda.id_categoria
                     LEFT OUTER JOIN community.subcategorias on subcategorias.id_subcategorias = ajuda.id_subcategoria
                     LEFT OUTER JOIN community.usuario on usuario.id_usuario = ajuda.id_usuario_auxiliado
+                    LEFT OUTER JOIN community.pessoa on pessoa.id_pessoa = usuario.id_pessoa
                     WHERE ajuda.id_usuario_auxiliado = $1 AND ajuda.status = 1 or ajuda.status = 2;`
     const values = [id_usuario_auxiliado]
 
@@ -129,10 +136,12 @@ async function listAllAjudaPerHelped(id_usuario_auxiliado: any){
 async function listAllAjudaPerHelper(id_usuario_contribuinte: any){
 
     const sql = `SELECT ajuda.id_ajuda, ajuda.comentario, ajuda.status, subcategorias.nome as subcategoria_nome, categorias.nome as categoria_nome, 
-                    ajuda.id_usuario_contribuinte as id_usuario_contribuinte
+                    ajuda.id_usuario_contribuinte as id_usuario_contribuinte,
+                    pessoa.nome as nome_pessoa_contribuinte, pessoa.telefone as telefone_pessoa_contribuinte
                     FROM community.ajuda LEFT OUTER JOIN community.categorias on categorias.id_categorias = ajuda.id_categoria
                     LEFT OUTER JOIN community.subcategorias on subcategorias.id_subcategorias = ajuda.id_subcategoria
                     LEFT OUTER JOIN community.usuario on usuario.id_usuario = ajuda.id_usuario_auxiliado
+                    LEFT OUTER JOIN community.pessoa on pessoa.id_pessoa = usuario.id_pessoa
                     WHERE ajuda.id_usuario_contribuinte = $1 AND ajuda.status = 2;`
     const values = [id_usuario_contribuinte]
 
