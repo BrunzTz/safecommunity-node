@@ -22,10 +22,10 @@ Rodar a API utilizando o comando `npm start`.
 3. Para que a API obtenha acesso a sua base de dados, acesse o arquivo `src/database/connection.ts` e depois altere os seguintes campos com as informações da sua base de dados:
 
 
-`const client = new Client({`
-`    user: 'postgres', -- Usuário do banco de dados`
-`    host: 'localhost', -- Instância do servidor`
-`    database: 'postgres', -- Nome do banco de dados`
-`    password: 'postgres', -- Senha do banco de dados`
-`    port: 5432  -- Porta do banco de dados`
-`});`
+`const client = new Client({
+    user: 'postgres', -- Usuário do banco de dados`
+    host: 'localhost', -- Instância do servidor`
+    database: 'postgres', -- Nome do banco de dados`
+    password: 'postgres', -- Senha do banco de dados`
+    port: 5432  -- Porta do banco de dados`
+});`
